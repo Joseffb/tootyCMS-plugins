@@ -7,7 +7,8 @@
   },
   "scripts": {
     "validate": "node ./scripts/validate-plugins.mjs",
+    "guard:auth": "node ./scripts/authorization-guard.mjs",
     "security:scan": "node ./scripts/security-scan.mjs",
-    "ci": "npm run validate && npm run security:scan"
+    "ci": "npm run validate && npm run guard:auth && npm run security:scan"
   }
 }
