@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   validate:
     name: Validate Plugins
@@ -35,3 +38,34 @@ jobs:
 
       - name: Scan for suspicious patterns and secrets
         run: npm run security:scan
+
+  update-catalog:
+    name: Update plugins.json catalog
+    runs-on: ubuntu-latest
+    needs: [validate, security]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate plugins catalog
+        run: npm run generate:catalog
+
+      - name: Commit catalog updates
+        run: |
+          if git diff --quiet -- plugins.json; then
+            echo "No catalog changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins.json
+          git commit -m "chore(catalog): refresh plugins.json"
+          git push

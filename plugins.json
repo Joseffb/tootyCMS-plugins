@@ -1,0 +1,136 @@
+{
+  "plugins": [
+    {
+      "id": "analytics-google",
+      "name": "Analytics Google",
+      "description": "Site-level provider plugin slot for Google Analytics integration.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.2.x",
+      "scope": "site",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "analytics-google"
+    },
+    {
+      "id": "analytics-tinybird",
+      "name": "Analytics Tinybird",
+      "description": "Analytics provider plugin using Tinybird pipes/events through generic analytics hooks.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.2.x",
+      "scope": "site",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "analytics-tinybird"
+    },
+    {
+      "id": "analytics-vercel",
+      "name": "Analytics Vercel",
+      "description": "Site-level provider plugin slot for Vercel analytics integration.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.2.x",
+      "scope": "site",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "analytics-vercel"
+    },
+    {
+      "id": "auth-apple",
+      "name": "Admin Auth Apple",
+      "description": "Enables Apple OAuth sign-in provider.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.3.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "auth-apple"
+    },
+    {
+      "id": "auth-facebook",
+      "name": "Admin Auth Facebook",
+      "description": "Enables Facebook OAuth sign-in provider.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.3.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "auth-facebook"
+    },
+    {
+      "id": "auth-github",
+      "name": "Admin Auth GitHub",
+      "description": "Enables GitHub OAuth sign-in provider.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.3.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "auth-github"
+    },
+    {
+      "id": "auth-google",
+      "name": "Admin Auth Google",
+      "description": "Enables Google OAuth sign-in provider.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.3.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "auth-google"
+    },
+    {
+      "id": "botid-shield",
+      "name": "Vercel BotID",
+      "description": "Vercel BotID protection for sensitive API routes with monitor or enforce mode.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.2.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "botid-shield"
+    },
+    {
+      "id": "dev-tools",
+      "name": "Admin - Dev Tools",
+      "description": "Adds developer-focused dashboard tools and optional render hooks.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.1.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "dev-tools"
+    },
+    {
+      "id": "gdpr-consent",
+      "name": "GDPR Consent",
+      "description": "Site-level consent policy plugin for analytics collection controls.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.2.x",
+      "scope": "site",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "gdpr-consent"
+    },
+    {
+      "id": "hello-teety",
+      "name": "Hello Teety",
+      "description": "Hear wisdom from Tooty’s one-minute-younger brother, Teety. Broody. Brilliant. Occasionally dramatic.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.1.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "hello-teety"
+    }
+  ]
+}

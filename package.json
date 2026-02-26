@@ -6,6 +6,7 @@
     "node": ">=22 <23"
   },
   "scripts": {
+    "generate:catalog": "node ./scripts/generate-plugins-catalog.mjs",
     "validate": "node ./scripts/validate-plugins.mjs",
     "security:scan": "node ./scripts/security-scan.mjs",
     "ci": "npm run validate && npm run security:scan"
