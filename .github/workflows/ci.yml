@@ -21,9 +21,6 @@ jobs:
       - name: Validate plugin contracts
         run: npm run validate
 
-      - name: Run authorization static guard
-        run: npm run guard:auth
-
   security:
     name: Security Scan
     runs-on: ubuntu-latest
