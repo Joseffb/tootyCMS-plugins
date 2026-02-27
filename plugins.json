@@ -109,6 +109,18 @@
       "directory": "dev-tools"
     },
     {
+      "id": "export-import",
+      "name": "Teety Migration Kit",
+      "description": "Teety Migration Kit — Your data’s go bag — because sovereignty matters. Mother import/export plugin with built-in snapshot and articles-json providers, extensible via child provider plugins.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.4.x",
+      "scope": "network",
+      "distribution": "core",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "export-import"
+    },
+    {
       "id": "gdpr-consent",
       "name": "GDPR Consent",
       "description": "Site-level consent policy plugin for analytics collection controls.",

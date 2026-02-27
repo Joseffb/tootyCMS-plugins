@@ -1,0 +1,86 @@
+{
+  "id": "communication-sendmail",
+  "name": "Communication Sendmail",
+  "description": "Self-hosted email delivery plugin using sendmail-compatible server daemons (Postfix, Exim, OpenSMTPD, msmtp, nullmailer, ssmtp) with auto-detect and override paths.",
+  "version": "0.1.0",
+  "minCoreVersion": "0.4.x",
+  "scope": "network",
+  "distribution": "community",
+  "capabilities": {
+    "hooks": true,
+    "adminExtensions": true,
+    "contentTypes": false,
+    "serverHandlers": false,
+    "authExtensions": false,
+    "scheduleJobs": false,
+    "communicationProviders": true,
+    "webCallbacks": false
+  },
+  "menu": {
+    "label": "Communication Sendmail",
+    "path": "/plugins/communication-sendmail"
+  },
+  "settingsFields": [
+    {
+      "key": "transport",
+      "label": "Transport",
+      "type": "select",
+      "defaultValue": "auto",
+      "options": [
+        { "label": "Auto (default detected)", "value": "auto" },
+        { "label": "Postfix", "value": "postfix" },
+        { "label": "Exim", "value": "exim" },
+        { "label": "OpenSMTPD", "value": "opensmtpd" },
+        { "label": "msmtp", "value": "msmtp" },
+        { "label": "nullmailer", "value": "nullmailer" },
+        { "label": "ssmtp", "value": "ssmtp" },
+        { "label": "sendmail", "value": "sendmail" }
+      ]
+    },
+    {
+      "key": "overridePath",
+      "label": "Override Sendmail Path",
+      "type": "text",
+      "placeholder": "/usr/sbin/sendmail",
+      "helpText": "Optional explicit path for sendmail-compatible binary."
+    },
+    {
+      "key": "customCommandPath",
+      "label": "Custom Command Path",
+      "type": "text",
+      "placeholder": "/opt/custom-mailer/bin/sendmail",
+      "helpText": "Optional custom server mailer path for non-standard installs."
+    },
+    {
+      "key": "commandArgs",
+      "label": "Command Args",
+      "type": "text",
+      "defaultValue": "-t -i",
+      "placeholder": "-t -i",
+      "helpText": "Arguments passed to the mailer command."
+    },
+    {
+      "key": "fromAddress",
+      "label": "From Address",
+      "type": "text",
+      "placeholder": "no-reply@example.com",
+      "helpText": "Default sender used for outbound emails."
+    },
+    {
+      "key": "timeoutMs",
+      "label": "Delivery Timeout (ms)",
+      "type": "number",
+      "defaultValue": "10000",
+      "helpText": "Mailer process timeout in milliseconds."
+    },
+    {
+      "key": "showDetectionBanner",
+      "label": "Show Detection Banner",
+      "type": "checkbox",
+      "defaultValue": "true"
+    }
+  ],
+  "developer": "Fernain Betancourt",
+  "website": "https://fernain.com",
+  "tags": ["communication", "email", "utility", "self-hosted"]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "export-import",
+  "name": "Teety Migration Kit",
+  "description": "Teety Migration Kit — Your data’s go bag — because sovereignty matters.",
+  "version": "0.1.0",
+  "minCoreVersion": "0.4.x",
+  "scope": "network",
+  "capabilities": {
+    "hooks": true,
+    "adminExtensions": true,
+    "contentTypes": false,
+    "serverHandlers": false
+  },
+  "menu": {
+    "label": "Migration Kit",
+    "path": "/app/plugins/export-import"
+  },
+  "settingsFields": [
+    {
+      "key": "defaultFormat",
+      "label": "Default Format",
+      "type": "select",
+      "defaultValue": "snapshot",
+      "options": [
+        { "label": "Snapshot", "value": "snapshot" },
+        { "label": "Articles JSON", "value": "articles-json" }
+      ]
+    },
+    {
+      "key": "allowImportApply",
+      "label": "Allow Apply Import (not dry-run)",
+      "type": "checkbox",
+      "defaultValue": false
+    },
+    {
+      "key": "allowChildProviders",
+      "label": "Allow Child Provider Extensions",
+      "type": "checkbox",
+      "defaultValue": true
+    }
+  ],
+  "developer": "Fernain Betancourt",
+  "website": "https://fernain.com",
+  "distribution": "core"
+}
