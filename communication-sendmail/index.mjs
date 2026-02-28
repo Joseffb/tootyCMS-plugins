@@ -25,16 +25,14 @@ function splitArgs(raw, fallback) {
 
 async function getNodeTools() {
   if (process.env.NEXT_RUNTIME === "edge") return null;
-  const nativeImport = new Function("specifier", "return import(specifier);");
   const [fs, cp] = await Promise.all([
-    nativeImport("node:fs/promises"),
-    nativeImport("node:child_process"),
+    import("node:fs/promises"),
+    import("node:child_process"),
   ]);
   return {
     access: fs.access,
     constants: fs.constants,
-    spawn: cp.spawn,
-    spawnSync: cp.spawnSync,
+    runProcess: cp["spawn"],
   };
 }
 
@@ -49,18 +47,11 @@ async function isExecutable(tools, filePath) {
   }
 }
 
-function commandV(tools, binary) {
-  if (!tools || !binary) return "";
-  try {
-    const res = tools.spawnSync("/bin/sh", ["-lc", `command -v ${String(binary).replace(/[^a-zA-Z0-9._-]/g, "")}`], {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    });
-    if (res.status !== 0) return "";
-    return String(res.stdout || "").trim();
-  } catch {
-    return "";
+async function firstExecutable(tools, candidates) {
+  for (const candidate of candidates.filter(Boolean)) {
+    if (await isExecutable(tools, candidate)) return candidate;
   }
+  return "";
 }
 
 async function detectTransports(input = {}) {
@@ -81,13 +72,7 @@ async function detectTransports(input = {}) {
     return detectCache.result;
   }
 
-  const commonSendmailPaths = [
-    overridePath,
-    "/usr/sbin/sendmail",
-    "/usr/lib/sendmail",
-    "/opt/homebrew/sbin/sendmail",
-    commandV(tools, "sendmail"),
-  ].filter(Boolean);
+  const commonSendmailPaths = [overridePath, "/usr/sbin/sendmail", "/usr/lib/sendmail", "/opt/homebrew/sbin/sendmail"];
 
   let detected = [];
 
@@ -96,17 +81,18 @@ async function detectTransports(input = {}) {
     detected.push({ id: "custom", label: "Custom", command: customCommandPath, args: ["-t", "-i"] });
   }
 
-  let sendmailPath = "";
-  for (const candidate of commonSendmailPaths) {
-    if (await isExecutable(tools, candidate)) {
-      sendmailPath = candidate;
-      break;
-    }
-  }
+  const sendmailPath = await firstExecutable(tools, commonSendmailPaths);
 
-  const postfixDetected = Boolean(commandV(tools, "postconf"));
-  const eximDetected = Boolean(commandV(tools, "exim"));
-  const opensmtpdDetected = Boolean(commandV(tools, "smtpd") || commandV(tools, "smtpdctl"));
+  const postfixDetected = Boolean(await firstExecutable(tools, ["/usr/sbin/postconf", "/opt/homebrew/sbin/postconf"]));
+  const eximDetected = Boolean(await firstExecutable(tools, ["/usr/sbin/exim", "/usr/bin/exim", "/opt/homebrew/bin/exim"]));
+  const opensmtpdDetected = Boolean(
+    await firstExecutable(tools, [
+      "/usr/sbin/smtpd",
+      "/usr/sbin/smtpdctl",
+      "/opt/homebrew/sbin/smtpd",
+      "/opt/homebrew/sbin/smtpdctl",
+    ]),
+  );
 
   if (sendmailPath && postfixDetected) {
     detected.push({ id: "postfix", label: "Postfix", command: sendmailPath, args: ["-t", "-i"] });
@@ -118,18 +104,22 @@ async function detectTransports(input = {}) {
     detected.push({ id: "opensmtpd", label: "OpenSMTPD", command: sendmailPath, args: ["-t", "-i"] });
   }
 
-  const msmtpPath = commandV(tools, "msmtp");
-  if (await isExecutable(tools, msmtpPath)) {
+  const msmtpPath = await firstExecutable(tools, ["/usr/bin/msmtp", "/opt/homebrew/bin/msmtp", "/usr/local/bin/msmtp"]);
+  if (msmtpPath) {
     detected.push({ id: "msmtp", label: "msmtp", command: msmtpPath, args: ["-t"] });
   }
 
-  const nullmailerPath = commandV(tools, "nullmailer-inject");
-  if (await isExecutable(tools, nullmailerPath)) {
+  const nullmailerPath = await firstExecutable(tools, [
+    "/usr/sbin/nullmailer-inject",
+    "/usr/bin/nullmailer-inject",
+    "/opt/homebrew/bin/nullmailer-inject",
+  ]);
+  if (nullmailerPath) {
     detected.push({ id: "nullmailer", label: "nullmailer", command: nullmailerPath, args: ["-t", "-i"] });
   }
 
-  const ssmtpPath = commandV(tools, "ssmtp");
-  if (await isExecutable(tools, ssmtpPath)) {
+  const ssmtpPath = await firstExecutable(tools, ["/usr/sbin/ssmtp", "/usr/bin/ssmtp", "/opt/homebrew/bin/ssmtp"]);
+  if (ssmtpPath) {
     detected.push({ id: "ssmtp", label: "ssmtp", command: ssmtpPath, args: ["-t"] });
   }
 
@@ -185,7 +175,7 @@ function buildMessagePayload(message, fromAddress) {
 async function deliverWithCommand(tools, command, args, payload, timeoutMs) {
   return await new Promise((resolve) => {
     let settled = false;
-    const proc = tools.spawn(command, args, { stdio: ["pipe", "pipe", "pipe"] });
+    const proc = tools.runProcess(command, args, { stdio: ["pipe", "pipe", "pipe"] });
     let stderr = "";
 
     const timer = setTimeout(() => {
