@@ -143,6 +143,18 @@
       "developer": "Fernain Betancourt",
       "website": "https://fernain.com",
       "directory": "hello-teety"
+    },
+    {
+      "id": "tooty-carousels",
+      "name": "Tooty Carousels",
+      "description": "Registers a carousel content type with theme-overridable plugin fallback templates.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.4.x",
+      "scope": "site",
+      "distribution": "community",
+      "developer": "Joseff Betancourt",
+      "website": "https://tootycms.com",
+      "directory": "tooty-carousels"
     }
   ]
 }

@@ -1,0 +1,24 @@
+<section class="tooty-plugin-carousel">
+  {{theme_header | safe}}
+
+  <main style="max-width: 960px; margin: 2rem auto; padding: 0 1rem 3rem; color: #111827;">
+    <header style="border: 1px solid #d1d5db; border-radius: 16px; padding: 1.25rem; background: #ffffff;">
+      <p style="margin: 0; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280;">Carousel</p>
+      <h1 style="margin: 0.35rem 0 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05;">{{ post.title }}</h1>
+      {% if post.description %}<p style="margin: 0.75rem 0 0; line-height: 1.7; color: #374151;">{{ post.description }}</p>{% endif %}
+      <p style="margin: 1rem 0 0;"><a href="{{ links.main_site }}">Back Home</a></p>
+    </header>
+
+    {% if post.image %}
+    <section style="margin-top: 1rem;">
+      <img src="{{ post.image }}" alt="{{ post.title }}" style="display: block; width: 100%; border-radius: 16px;" />
+    </section>
+    {% endif %}
+
+    <article style="margin-top: 1rem; border: 1px solid #d1d5db; border-radius: 16px; padding: 1.25rem; background: #ffffff;">
+      {{ post.content_html | safe }}
+    </article>
+  </main>
+
+  {{theme_footer | safe}}
+</section>

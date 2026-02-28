@@ -1,0 +1,32 @@
+{
+  "id": "tooty-carousels",
+  "name": "Tooty Carousels",
+  "description": "Registers a carousel content type with theme-overridable plugin fallback templates.",
+  "version": "0.1.0",
+  "minCoreVersion": "0.4.x",
+  "scope": "site",
+  "distribution": "community",
+  "menuPlacement": "settings",
+  "developer": "Joseff Betancourt",
+  "website": "https://tootycms.com",
+  "capabilities": {
+    "hooks": true,
+    "adminExtensions": true,
+    "contentTypes": true,
+    "serverHandlers": false
+  },
+  "menu": {
+    "label": "Carousels",
+    "path": "/app/plugins/tooty-carousels?tab=slides",
+    "order": 45
+  },
+  "settingsFields": [
+    {
+      "key": "default_limit",
+      "label": "Default Carousel Limit",
+      "type": "number",
+      "defaultValue": "7",
+      "helpText": "Suggested number of carousel entries for theme queries."
+    }
+  ]
+}
