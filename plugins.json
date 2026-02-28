@@ -97,6 +97,18 @@
       "directory": "botid-shield"
     },
     {
+      "id": "communication-sendmail",
+      "name": "Communication Sendmail",
+      "description": "Self-hosted email delivery plugin using sendmail-compatible server daemons (Postfix, Exim, OpenSMTPD, msmtp, nullmailer, ssmtp) with auto-detect and override paths.",
+      "version": "0.1.0",
+      "minCoreVersion": "0.4.x",
+      "scope": "network",
+      "distribution": "community",
+      "developer": "Fernain Betancourt",
+      "website": "https://fernain.com",
+      "directory": "communication-sendmail"
+    },
+    {
       "id": "dev-tools",
       "name": "Admin - Dev Tools",
       "description": "Adds developer-focused dashboard tools and optional render hooks.",
@@ -111,7 +123,7 @@
     {
       "id": "export-import",
       "name": "Teety Migration Kit",
-      "description": "Teety Migration Kit — Your data’s go bag — because sovereignty matters. Mother import/export plugin with built-in snapshot and articles-json providers, extensible via child provider plugins.",
+      "description": "Teety Migration Kit — Your data’s go bag — because sovereignty matters.",
       "version": "0.1.0",
       "minCoreVersion": "0.4.x",
       "scope": "network",
